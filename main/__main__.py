@@ -1,0 +1,1 @@
+from resource_manager import __all__ as resource_manager_all
