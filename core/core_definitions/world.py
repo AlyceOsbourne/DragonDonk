@@ -1,9 +1,10 @@
 from __future__ import annotations
-from main.resource_manager import __export__
+
 from abc import ABC, abstractmethod
 
+from core.core_definitions.items import Item
 
-@__export__
+
 class Room(ABC):
 
     @property
@@ -62,7 +63,6 @@ class Room(ABC):
         ...
 
 
-@__export__
 class Dungeon(ABC):
 
     def generate_rooms(self) -> None:
@@ -78,69 +78,42 @@ class Dungeon(ABC):
         ...
 
 
+class Town(ABC):
 
-@__export__
+    def generate_buildings(self) -> None:
+        ...
+
+    def generate_encounters(self) -> None:
+        ...
+
+    def generate_loot(self) -> None:
+        ...
+
+    def generate_paths(self) -> None:
+        ...
+
+
 class Map(ABC):
-    ...
+    def generate_dungeons(self) -> None:
+        ...
+
+    def generate_towns(self) -> None:
+        ...
+
+    def generate_paths(self) -> None:
+        ...
+
+    def generate_encounters(self) -> None:
+        ...
+
+    def generate_loot(self) -> None:
+        ...
 
 
-@__export__
 class Quest(ABC):
-    ...
+    starting_location: Room or Dungeon or Town
+    ending_location: Room or Dungeon or Town
+    reward: [Item, ...]
 
 
-@__export__
-class Skill(ABC):
-    ...
-
-
-@__export__
-class Stats(ABC):
-    ...
-
-
-@__export__
-class Language(ABC):
-    ...
-
-
-@__export__
-class Item(ABC):
-    ...
-
-@__export__
-class Inventory(ABC):
-    ...
-
-
-@__export__
-class Actor(ABC):
-    @property
-    @abstractmethod
-    def name(self):
-        ...
-
-    @property
-    @abstractmethod
-    def description(self):
-        ...
-
-    @property
-    @abstractmethod
-    def stats(self) -> Stats:
-        ...
-
-    @property
-    @abstractmethod
-    def skills(self) -> list["Skill"]:
-        ...
-
-    @property
-    @abstractmethod
-    def languages(self) -> list["Language"]:
-        ...
-
-    @property
-    @abstractmethod
-    def inventory(self) -> Inventory:
-        ...
+__all__ = ["Room", "Dungeon", "Town", "Map", "Quest"]
