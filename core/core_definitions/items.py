@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from abc import ABCMeta, ABC, abstractmethod
 from enum import Enum, auto
+from typing import Dict
 
-from core.core_definitions.abstract import Inventory, Effect
+from core.core_definitions.abstract import Effect
 
 
 class Item(ABC):
@@ -191,7 +192,7 @@ class Consumable(Item, metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def effect(self) -> Effect:
+    def effect(self) -> "Effect":
         ...
 
     @property
@@ -200,11 +201,34 @@ class Consumable(Item, metaclass=ABCMeta):
         ...
 
 
-class WearableInventory(Inventory, Armor, metaclass=ABCMeta):
-    @property
-    def slot(self):
-        return EquipmentSlot.BACK
+class Inventory(ABC):
 
     @property
-    def defense_type(self) -> ArmorDefenseType:
-        return ArmorDefenseType.No_Armor
+    @abstractmethod
+    def items(self) -> Dict["Item", int]:
+        ...
+
+    @property
+    @abstractmethod
+    def max_size(self) -> int:
+        ...
+
+    @property
+    @abstractmethod
+    def max_weight(self) -> int:
+        ...
+
+    @property
+    @abstractmethod
+    def size(self) -> int:
+        ...
+
+    @property
+    @abstractmethod
+    def weight(self) -> int:
+        ...
+
+    @property
+    @abstractmethod
+    def gold(self) -> int:
+        ...

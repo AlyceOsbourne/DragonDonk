@@ -1,5 +1,7 @@
 import sys
 
+# todo, create plugin loader class, with safety checking (be smart, use a module for this, this is something we can learn later)
+
 
 class Registry:
     def __init__(self, cls):
@@ -12,7 +14,6 @@ class Registry:
 
     def get(self, name):
         return self.resources[name]
-
 
 
 class ResourceManager:
@@ -30,7 +31,7 @@ class ResourceManager:
         pass
 
     def __init__(self):
-        self.registries = {}
+        self.registries: set[Registry] = set()
 
 
 class ResourceManagerError(Exception):

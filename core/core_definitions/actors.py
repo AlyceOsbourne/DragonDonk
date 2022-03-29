@@ -3,8 +3,8 @@ from abc import ABC, ABCMeta, abstractmethod
 from enum import Enum, auto
 from typing import Dict, List
 
-from core.core_definitions.abstract import Inventory, Effect
-from core.core_definitions.items import Equipment
+from core.core_definitions.abstract import Effect
+from core.core_definitions.items import Equipment, Inventory
 
 
 class Skill(ABC):
