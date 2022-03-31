@@ -5,8 +5,10 @@ from enum import Enum, auto
 from typing import Dict
 
 from core.core_definitions.abstract import Effect
+from core.core_registry import Registry
 
 
+@Registry.register
 class Item(ABC):
     @property
     @abstractmethod
@@ -54,6 +56,7 @@ class WeaponAttackType(Enum):
     BLUNT = auto()
 
 
+@Registry.register
 class Weapon(Item, metaclass=ABCMeta):
     @property
     @abstractmethod
@@ -103,6 +106,7 @@ class ArmorDefenseType(Enum):
     Heavy = auto()
 
 
+@Registry.register
 class Armor(Item, metaclass=ABCMeta):
     @property
     @abstractmethod
@@ -188,6 +192,7 @@ class Equipment:
         ...
 
 
+@Registry.register
 class Consumable(Item, metaclass=ABCMeta):
 
     @property
@@ -201,6 +206,7 @@ class Consumable(Item, metaclass=ABCMeta):
         ...
 
 
+@Registry.register
 class Inventory(ABC):
 
     @property
@@ -232,3 +238,6 @@ class Inventory(ABC):
     @abstractmethod
     def gold(self) -> int:
         ...
+
+
+__all__ = ["Item", "Weapon", "Armor", "Equipment", "Consumable", "Inventory"]

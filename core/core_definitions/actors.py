@@ -1,12 +1,12 @@
 from __future__ import annotations
-from abc import ABC, ABCMeta, abstractmethod
-from enum import Enum, auto
-from typing import Dict, List
+from abc import ABC, abstractmethod
+from typing import Dict
 
 from core.core_definitions.abstract import Effect
 from core.core_definitions.items import Equipment, Inventory
+from core.core_registry import Registry
 
-
+@Registry.register
 class Skill(ABC):
     @property
     @abstractmethod
@@ -24,13 +24,12 @@ class Skill(ABC):
         ...
 
 
-class Stat(Enum):
-    STRENGTH = auto()
-    DEXTERITY = auto()
-    CONSTITUTION = auto()
-    INTELLIGENCE = auto()
-    WISDOM = auto()
-    CHARISMA = auto()
+@Registry.register
+class Stat(ABC):
+    @property
+    @abstractmethod
+    def name(self) -> str:
+        ...
 
 
 class Stats(ABC):
@@ -60,6 +59,7 @@ class Stats(ABC):
         ...
 
 
+@Registry.register
 class Language(ABC):
     @property
     @abstractmethod
@@ -83,6 +83,7 @@ class Language(ABC):
         return " ".join([self.translate(word) for word in sentence.split(" ")])
 
 
+@Registry.register
 class Actor(ABC):
     @property
     @abstractmethod

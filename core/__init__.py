@@ -1,5 +1,5 @@
-from .resource_manager import ResourceManager
 from .core_definitions import *
+from .core_mechanics import *
+from .core_registry import Registry, registries as registries
 
-__all__ = ["ResourceManager", *core_definitions.__all__]
 
